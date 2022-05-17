@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head') %>
+<body>
+    <section class="postwin">
+        <img src="/menu.png" alt="" id="opt-menu" onclick="">
+        <% if(Auth&&user.admin) { %>
+        <img src="/admmenu.png" alt="" id="opt-adm-menu" onclick="admmenu()">
+        <div class="admin-post-panel" id="admin-post-panel">
+            <ul>
+                <li tabindex="0">Modify post</li>
+                <li tabindex="0" class="delete" data-doc="<%= post._id %>">Delete post</li>
+            </ul>
+        </div>
+        <% } %>
+        <div class="post-info">
+            <h6 id="post-author"><%= author.username %></h6>
+            <h2 id="post-title"><%=post.title%></h2>
+            <h4 id="post-body"><%=post.body%></h4>
+            <h6 id="post-date"><%= date.format(post.createdAt, 'yyyy  MMMM dd  HH:mm') %></h6>
+        </div>
+        <div class="line"></div>
+        <div class="coms">
+            <textarea name="com" id="com" data-id="<%= post._id %>" placeholder="Type a comment"></textarea>
+            <button type="button" onclick="com()">Submit</button>
+        </div>
+        <div class="comments">
+            <h4 id="post-comments-sect-comment">Comments:</h4>
+            <% if (post.coms.length > 0) { %>
+            <% post.coms.forEach(comment => { %>
+                <div id="post-comments-sect-singlecomment">
+                    <h6 id="post-comments-sect-singlecomment-author"><%= comment.author.username %></h6>
+                    <h4 id="post-comments-sect-singlecomment-body"> <%= comment.body %> </h4>
+                    <h6 id="post-comments-sect-singlecomment-date"> <%= date.format(comment.written, 'yyyy  MMMM dd  HH:mm') %> </h6>
+                </div>
+            <% })} %>
+        </div>
+    </section>
+    <script>
+        function admmenu() {
+            document.getElementById('admin-post-panel').style.display = 'block'
+        }
+
+        const deletevent = document.querySelector('li.delete')
+        deletevent.addEventListener('click', (e) => {
+            const endpoint = `/posts/${deletevent.dataset.doc}`
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                response.json()
+            })
+            .then(data => window.location = data.redirect)
+            .catch(err => console.log(err));
+        })
+
+        function com() {
+            if (document.getElementById('com').value) {
+                fetch(`/posts/${document.getElementById('com').dataset.id}/com`, {
+                    method:"POST",
+                    body: JSON.stringify({ com: document.getElementById('com').value }),
+                    headers: { 'Content-Type': "application/json"}
+                })
+                .then((response) => {
+                response.json()
+                })
+                .then(data => window.location.href = data.redirect)
+            }
+        }
+    </script>
+</body>
+</html>

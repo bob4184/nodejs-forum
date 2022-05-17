@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+    <section class="mainwin">
+        <div class="profile">
+            <a href="/profile/settings"><h3>Profile settings</h3></a>
+            <h2><%= User.username %></h2>
+            <% if (Auth&&User.admin) { %>
+            <h3>Admin status</h3>
+            <% } %>
+            <h3><%= date.format(User.createdAt, 'yyyy  MMMM dd  HH:mm') %></h3>
+            <h3>Mail: <%= User.mail %></h3>
+        </div>
+        <div class="userPosts">
+            <h2>Posts</h2>
+        </div>
+    </section>
+</body>
+</html>

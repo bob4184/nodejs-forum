@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("partials/head.ejs") %>
+<body>
+    <section class="login">
+        <div class="loginwin">
+            <h1 id="w-login">Login</h1>
+            <form action="/login" method="post" class="loginform">
+                <label for="username">Username</label>
+                <input type="text" name="username">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+                <button>Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

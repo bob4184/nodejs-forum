@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head') %>
+<body>
+    <section class="create">
+        <div>
+            <form action="/create" method="post">
+                <label for="title">Title:</label>
+                <input type="text" name="title">
+                <label for="body">Body:</label>
+                <textarea name="body" cols="30" rows="10"></textarea>
+                <button>Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

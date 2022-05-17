@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+body {
+    background-color: rgb(53, 53, 53);
+}
+
+.panel nav ul li {
+    display: inline-block;
+    margin: 2vh 5vh;
+}
+
+.panel nav ul li a {
+    text-decoration: none;
+    
+    font-weight: 500;
+}
+
+.header {
+    height: 5%;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(34, 34, 34);
+    margin-bottom: 2vh;
+}
+
+.panel {
+    width: 80%;
+    margin: 0 10%;
+}
+
+.mainwin {
+    width: 90%;
+    margin: 2% 5%;
+    border: 1px rgba(0, 0, 0, 0.7) solid;
+    height: 85vh;
+}
+
+.posts {
+    margin: 1%;
+}
+
+.title {
+    padding: 2px;
+    border: 1px rgba(255,255,255,0.5) solid;
+    width: 100%;
+    background-color: rgb(0, 66, 153);
+}
+
+.single {
+    text-decoration: none;
+}
+
+.black {
+    color: black;
+}
+
+button, input, textarea {
+    color: black;
+}
+
+.login {
+    width: 15vw;
+    height: 40vh;
+    border: 1px rgba(0, 0, 0, 0.7) solid;
+    margin: 25vh 42.5vw;
+    
+}
+
+.loginwin {
+    display: grid;
+    grid-template-columns: min-content;
+    justify-content: center;
+    text-align: center;
+}
+
+.loginform label {
+    margin-bottom: 50px;
+}
+
+#w-login {
+    padding: 1vh 0;
+}
+
+#message {
+    display:none;
+    background: #535353;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    width: 20vw;
+}
+  
+#message p {
+padding: 10px 35px;
+font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+color: green;
+}
+
+.valid:before {
+position: relative;
+left: -35px;
+/* content: "&#10004;"; */
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+color: red;
+}
+
+.invalid:before {
+position: relative;
+left: -35px;
+/* content: "&#10006;"; */
+}
+
+.postwin {
+    width: 90vw;
+    margin: 2vh 5vw;
+    background-color: rgb(41, 41, 41);
+}
+
+.post-info {
+    padding: 3vh 3vw;
+}
+
+#post-title {
+    margin-top: 0.5vh;
+    margin-bottom: 3.5vh;
+}
+
+#post-body {
+    margin-bottom: 1vh;
+}
+
+
+#post-date {
+    float: right;
+}
+
+.admin-post-panel {
+    float: right;
+    display: none;
+}
+
+.admin-post-panel ul li{
+    padding: 0.3vh 0.5vw;
+    display: block;
+    text-decoration: none;
+}
+
+.admin-post-panel ul li:hover {
+    transition: 0.5s;
+    background-color: rgba(255,255,255,0.6);
+    color: black;
+}
+
+#opt-menu, #opt-adm-menu {
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2px;
+    margin: 0 5px;
+    float: right;
+}
+
+#com {
+    resize: none;
+    width: 99%;
+    height: 10vh;
+}
+
+.coms {
+    margin: 2vh 1.5vw;
+}
+
+.line {
+    height: 0;
+    width: 90%;
+    margin: 5vh 5vw;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+#post-comments-sect-comment {
+    margin-bottom: 2vh;
+}
+
+.comments {
+    margin-left: 1.5vw;
+}
+
+#post-comments-sect-singlecomment {
+    margin-left: 0.5vw;
+}
+
+#post-comments-sect-singlecomment-author, #post-comments-sect-singlecomment-body {
+    margin-bottom: 0.3vh;
+}
