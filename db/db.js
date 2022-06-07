@@ -1,22 +1,21 @@
-const { type } = require('express/lib/response')
-const mongoose = require('mongoose')
-require('dotenv').config()
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const dbcon = mongoose.connect(process.env.MONGOOSE,{
+export const dbcon = mongoose.connect(process.env.MONGOOSE,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 
 
-module.exports.dbcon = dbcon
-
-const PostSchema = mongoose.Schema({
+const postSchema = mongoose.Schema({
     title: {type: String, required: true},
     body: {type: String, required: true},
     author: {
         id: { type: String },
         username: {type: String}
     },
+    authorId: {type: String},
     coms: [{
         author: {
             id: {type: String},
@@ -25,20 +24,38 @@ const PostSchema = mongoose.Schema({
         body: {type: String},
         written: {type: Date},
         modified: {type: Date}
-    }]
+    }],
+    votes: {type: Number}
 }, { timestamps: true })
+export const Post = mongoose.model('Post', postSchema);
 
-const Post = mongoose.model('Post', PostSchema);
-
-module.exports.Post = Post
-
-const UserSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     username: String,
     hash: String,
     salt: String,
     admin: Boolean,
+    mod: Boolean,
+    avatar: Buffer,
+    avatarMini: Buffer,
+    boolean: {
+        avatar: Boolean,
+    },
+    imageType: String,
     mail: String
 }, { timestamps: true })
+export const User = mongoose.model('User', userSchema);
 
-const User = mongoose.model('User', UserSchema);
-module.exports.User = User
+const imageSchema = mongoose.Schema({
+    avatarId: String,
+    postId: String,
+    contentType: String,
+    data: Buffer
+})
+export const Image = mongoose.model('Image', imageSchema)
+
+const voteSchema = mongoose.Schema({
+    by: String,
+    to: String,
+    status: Number
+})
+export const Vote = mongoose.model('Votes', voteSchema)

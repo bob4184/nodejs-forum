@@ -3,20 +3,25 @@
     <%- include("partials/head.ejs") %>
 <body>
     <section class="signup">
-        <form action="/signup" method="post">
-            <label for="username">Your username:</label>
-            <input type="text" name="username" id="username" required> <button type="button" onclick="AUCheck()">Check availability</button> <br><br><br>
-            <label for="pass">Password:</label>
-            <input type="password" name="pass" id="psw" pattern="(?=.*\d)(?=.*[a-z]).{4,}" required> <!-- pattern (?=.*[A-Z]) //capital  -->
-            <button>Submit</button>
-        </form>
-        <div id="message">
-            <h3>Password must contain the following:</h3>
-            <p id="letter" class="invalid">Must contain any lowercase letter: <i>a</i></p>
-            <!-- <p id="capital" class="invalid">Must contain any capital (uppercase) letter: <i>A</i></p> -->
-            <p id="number" class="invalid">Must contain any number: <i>123</i></p>
-            <p id="length" class="invalid">Must contain minimum 4 characters</p>
-          </div>
+      <div class="signupwin">
+        <div id="signup-header">Signup</div>
+        <div>
+          <form action="/signup" method="post">
+              <label for="username">Your username:</label>
+              <input type="text" name="username" id="username" required> <button type="button" onclick="AUCheck()">Check availability</button> <br><br><br>
+              <label for="pass">Password:</label>
+              <input type="password" name="pass" id="psw" pattern="(?=.*\d)(?=.*[a-z]).{4,}" required> <!-- pattern (?=.*[A-Z]) //capital  -->
+              <button>Submit</button>
+          </form>
+        </div>
+        <div id="signup-pass-message">
+          <div>Password must contain the following:</div>
+          <p id="letter" class="invalid">Must contain any lowercase letter: <i>a</i></p>
+          <!-- <p id="capital" class="invalid">Must contain any capital (uppercase) letter: <i>A</i></p> -->
+          <p id="number" class="invalid">Must contain any number: <i>123</i></p>
+          <p id="length" class="invalid">Must contain minimum 4 characters</p>
+        </div>
+      </div>
     </section>
     <script>
       function AUCheck() {

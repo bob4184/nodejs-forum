@@ -3,13 +3,20 @@
     <%- include('partials/head.ejs') %>
 <body>
   <section class="mainwin">
-    <div class="posts">
+    <div class="main-posts-container">
         <% if (posts.length > 0) { %>
             <% posts.forEach(post => { %>
-                <a class="single" href="/posts/<%= post._id %>">
-                  <h3 class="title"><%= post.title %></h3>
-                  <!-- <p class="snippet"><%= post.snippet %></p> -->
+              <div class="main-posts-single-container">
+                <a id="main-posts-single" href="/posts/<%= post._id %>">
+                  <div id="main-posts-desc" tabindex="0">
+                    <div id="main-posts-desc-title"><%= post.title %></div>
+                    <div>
+                      <div id="main-posts-desc-username"><%= post.author.username %></div>
+                      <div id="main-posts-desc-date"><%= date.format(post.createdAt, 'yyyy  MMMM dd  HH:mm') %></div>
+                    </div>
+                  </div>
                 </a>
+              </div>
               <% }) %>
             <% } else { %>
               <p>There are no blogs to display...</p>

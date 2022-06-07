@@ -4,16 +4,21 @@
 <body>
     <section class="mainwin">
         <div class="profileset">
-            <h3>Change username</h3>
+            <form action="/profile/settings/newavatar" method="POST" enctype="multipart/form-data">
+                <label for="image">Image Title</label>
+                <input type="file" id="image" name="image" value="" required>
+                <button type="submit">Set new avatar</button>
+            </form>
+            <div>Change username</div>
             <input type="text" id="usernameInput">
             <button type="button" onclick="changeUsername()">Change username</button>
-            <h3>Change password</h3>
+            <div>Change password</div>
             <input type="password" id="passwordInput">
             <button type="button" onclick="changePassword()">Change password</button>
-            <h3>Link/Change mail address</h3>
-            <h4>Confirm password</h4>
+            <div>Link/Change mail address</div>
+            <div>Confirm password</div>
             <input type="password" id="passConfirmForMail">
-            <h4>New mail</h4>
+            <div>New mail</div>
             <input type="text" id="mailInput">
             <button type="button" onclick="changeMail()">Change mail</button>
         </div>
@@ -59,6 +64,18 @@
                     }
                 })
             } else {alert('Cant detect text')}
+        }
+
+        function sendImage() {
+            if(document.getElementById('image').value) {
+                fetch('/profile/settings/newavatar', {
+                    method: "POST",
+                    body: JSON.stringify({body: document.getElementById("image").value}),
+                    headers: { 'Content-Type': "application/json"}
+                })
+            } else {
+                alert('Insert image')
+            }
         }
     </script>
 </body>

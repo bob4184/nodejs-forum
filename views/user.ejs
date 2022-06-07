@@ -4,9 +4,9 @@
 <body>
     <section class="profilewin">
         <div class="profile-flex">
-            <% if (user.boolean.avatar) { %>
+            <% if (profile.boolean.avatar) { %>
                 <div class="profile-avatar-space">
-                    <img src="data:image/<%=user.imageType%>;base64,<%=user.avatar.toString('base64')%>">
+                    <img src="data:image/<%=profile.avatarType%>;base64,<%=profile.avatar.toString('base64')%>">
                 </div>
             <% } else { %>
                 <div class="profile-avatar-space">
@@ -14,17 +14,13 @@
                 </div>
             <% } %>
             <div class="profile-bio">
-                <div id="profile-username"><em>Username:</em> <%= user.username %></div>
-                <% if (Auth&&user.admin) { %>
+                <div id="profile-username"><em>Username:</em> <%= profile.username %></div>
+                <% if (Auth&&profile.admin) { %>
                 <div><em>Status:</em> Admin</div>
-                <% } else if (Auth&&user.mod) { %>
+                <% } else if (Auth&&profile.mod) { %>
                 <div><em>Status:</em> Mod</div>
                 <% } %>
-                <div><em>Registration date:</em><%= date.format(user.createdAt, 'yyyy  MMMM dd  HH:mm') %></div>
-                <div><em>Mail:</em> <%= user.mail %></div>
-                <% if (Auth) { %>
-                <a href="/profile/settings"><div>Profile settings</div></a>
-                <% } %>
+                <div><em>Registration date:</em><%= date.format(profile.createdAt, 'yyyy  MMMM dd  HH:mm') %></div>
             </div>
         </div>
         <div class="userPosts">

@@ -3,9 +3,9 @@
     <%- include('./partials/head') %>
 <body>
     <section class="postwin">
-        <img src="/menu.png" alt="" id="opt-menu" onclick="">
+        <div id="opt-menu" tabindex="0">Menu</div>
         <% if(Auth&&user.admin) { %>
-        <img src="/admmenu.png" alt="" id="opt-adm-menu" onclick="admmenu()">
+        <div id="opt-adm-menu" tabindex="0" onclick="admmenu()">Admin menu</div>
         <div class="admin-post-panel" id="admin-post-panel">
             <ul>
                 <li tabindex="0">Modify post</li>
@@ -13,30 +13,83 @@
             </ul>
         </div>
         <% } %>
-        <div class="post-info">
-            <h6 id="post-author"><%= author.username %></h6>
-            <h2 id="post-title"><%=post.title%></h2>
-            <h4 id="post-body"><%=post.body%></h4>
-            <h6 id="post-date"><%= date.format(post.createdAt, 'yyyy  MMMM dd  HH:mm') %></h6>
+        <div class="singlepost-info">
+            <div id="singlepost-info-author-avatar">
+                <div><img src="data:image/<%=author.imageType%>;base64,<%=author.avatarMini.toString('base64')%>" alt=""></div>
+                <div id="singlepost-author"><a href="/profile/<%= author._id %>"><%= author.username %></a></div>
+            </div>
+            <h2 id="singlepost-title"><%=post.title%></h2>
+            <h3 id="singlepost-body"><%=post.body%></h3>
+            <div id="singlepost-date"><%= date.format(post.createdAt, 'yyyy  MMMM dd  HH:mm') %></div>
         </div>
-        <div class="line"></div>
-        <div class="coms">
-            <textarea name="com" id="com" data-id="<%= post._id %>" placeholder="Type a comment"></textarea>
+        <% if (Auth) { %>
+            <div class="voting">
+                <div id="singlepost-post-votes" data-votes="<%= post.votes %>"><%= post.votes %></div>
+                <div onclick="upvote()" id="singlepost-post-upvote">Upvote</div>
+                <div onclick="downvote()" id="singlepost-post-downvote">Downvote</div>
+            </div>
+        <% } %>
+        <div class="singlepost-line"></div>
+        <div class="singlepost-comments-submit">
+            <textarea name="com" id="singlepost-comments-textarea" data-id="<%= post._id %>" placeholder="Type a comment"></textarea>
             <button type="button" onclick="com()">Submit</button>
         </div>
-        <div class="comments">
-            <h4 id="post-comments-sect-comment">Comments:</h4>
+        <div class="singlepost-comments">
+            <h4 id="singlepost-comments-sect-comment">Comments:</h4>
             <% if (post.coms.length > 0) { %>
             <% post.coms.forEach(comment => { %>
-                <div id="post-comments-sect-singlecomment">
-                    <h6 id="post-comments-sect-singlecomment-author"><%= comment.author.username %></h6>
-                    <h4 id="post-comments-sect-singlecomment-body"> <%= comment.body %> </h4>
-                    <h6 id="post-comments-sect-singlecomment-date"> <%= date.format(comment.written, 'yyyy  MMMM dd  HH:mm') %> </h6>
+                <div id="singlepost-comments-sect-singlecomment">
+                    <h6 id="singlepost-comments-sect-singlecomment-author"><%= comment.author.username %></h6>
+                    <h4 id="singlepost-comments-sect-singlecomment-body"> <%= comment.body %> </h4>
+                    <h6 id="singlepost-comments-sect-singlecomment-date"> <%= date.format(comment.written, 'yyyy  MMMM dd  HH:mm') %> </h6>
+                    <div id="singlepost-comments-sect-commentline"></div>
                 </div>
             <% })} %>
         </div>
     </section>
     <script>
+        function upvote() {
+            fetch(`/posts/${document.getElementById('singlepost-comments-textarea').dataset.id}/upvote`, {
+                method: 'POST',
+                body: JSON.stringify({ status: 1 }),
+                headers: { 'Content-Type': "application/json"}
+            })
+            .then((res => res.json()))
+            .then((res => {
+                if (res.status == 1) {
+                    document.getElementById('singlepost-post-votes').innerText = parseInt(document.getElementById('singlepost-post-votes').dataset.votes) + 1
+                    document.getElementById('singlepost-post-upvote').style.backgroundColor = 'rgba(255,255,255,0.1)'
+                    document.getElementById('singlepost-post-downvote').style.backgroundColor = ''
+                }
+                else if (res.status == 0) {
+                    document.getElementById('singlepost-post-votes').innerText = parseInt(document.getElementById('singlepost-post-votes').dataset.votes)
+                    document.getElementById('singlepost-post-downvote').style.backgroundColor = ''
+                    document.getElementById('singlepost-post-upvote').style.backgroundColor = ''
+                }
+            }))
+        }
+
+        function downvote() {
+            fetch(`/posts/${document.getElementById('singlepost-comments-textarea').dataset.id}/downvote`, {
+                method: 'POST',
+                body: JSON.stringify({ status: -1 }),
+                headers: { 'Content-Type': "application/json"}
+            })
+            .then((res => res.json()))
+            .then((res => {
+                if (res.status == -1) {
+                    document.getElementById('singlepost-post-votes').innerText = parseInt(document.getElementById('singlepost-post-votes').dataset.votes) - 1;
+                    document.getElementById('singlepost-post-downvote').style.backgroundColor = 'rgba(255,255,255,0.1)'
+                    document.getElementById('singlepost-post-upvote').style.backgroundColor = ''
+                }
+                else if (res.status == 0) {
+                    document.getElementById('singlepost-post-votes').innerText = parseInt(document.getElementById('singlepost-post-votes').dataset.votes)
+                    document.getElementById('singlepost-post-downvote').style.backgroundColor = ''
+                    document.getElementById('singlepost-post-upvote').style.backgroundColor = ''
+                }
+            }))
+        }
+
         function admmenu() {
             document.getElementById('admin-post-panel').style.display = 'block'
         }
@@ -55,10 +108,10 @@
         })
 
         function com() {
-            if (document.getElementById('com').value) {
-                fetch(`/posts/${document.getElementById('com').dataset.id}/com`, {
+            if (document.getElementById('singlepost-comments-textarea').value) {
+                fetch(`/posts/${document.getElementById('singlepost-comments-textarea').dataset.id}/com`, {
                     method:"POST",
-                    body: JSON.stringify({ com: document.getElementById('com').value }),
+                    body: JSON.stringify({ com: document.getElementById('singlepost-comments-textarea').value }),
                     headers: { 'Content-Type': "application/json"}
                 })
                 .then((response) => {

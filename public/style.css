@@ -11,6 +11,19 @@ body {
     background-color: rgb(53, 53, 53);
 }
 
+.black {
+    color: black;
+}
+
+button, input, textarea {
+    color: black;
+}
+
+
+
+
+/* panel */
+
 .panel nav ul li {
     display: inline-block;
     margin: 2vh 5vh;
@@ -35,35 +48,52 @@ body {
     margin: 0 10%;
 }
 
+
+
+
+/* main page */
+
 .mainwin {
     width: 90%;
     margin: 2% 5%;
-    border: 1px rgba(0, 0, 0, 0.7) solid;
     height: 85vh;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.posts {
-    margin: 1%;
+.main-posts-container {
+    padding: 1em;
 }
 
-.title {
-    padding: 2px;
-    border: 1px rgba(255,255,255,0.5) solid;
-    width: 100%;
-    background-color: rgb(0, 66, 153);
-}
-
-.single {
+#main-posts-single {
     text-decoration: none;
+    display: inline;
+    border-radius: 5px;
 }
 
-.black {
-    color: black;
+#main-posts-desc {
+    font-size: large;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
-button, input, textarea {
-    color: black;
+#main-posts-desc:hover {
+    transition: 0.5s;
+    background-color: rgba(255,255,255,0.3);
 }
+
+#main-posts-desc-username {
+    font-size: small;
+}
+
+#main-posts-desc-date {
+    font-size: x-small;
+}
+
+
+
+
+/* login page */
 
 .login {
     width: 15vw;
@@ -88,7 +118,27 @@ button, input, textarea {
     padding: 1vh 0;
 }
 
-#message {
+
+
+
+/* signup page */
+
+.signup {
+    margin: 10vh 30vw; 
+    height: 70vh;
+    width: 40vw;
+    background-color: rgb(41, 41, 41);
+}
+
+.signupwin {
+    display: grid;
+    grid-template-columns: min-content;
+    text-align: center;
+    justify-content: center;
+}
+
+
+#signup-pass-message {
     display:none;
     background: #535353;
     color: #000;
@@ -98,7 +148,7 @@ button, input, textarea {
     width: 20vw;
 }
   
-#message p {
+#signup-pass-message p {
 padding: 10px 35px;
 font-size: 18px;
 }
@@ -125,28 +175,34 @@ left: -35px;
 /* content: "&#10006;"; */
 }
 
+
+
+
+/* single post page */
+
 .postwin {
     width: 90vw;
     margin: 2vh 5vw;
     background-color: rgb(41, 41, 41);
 }
 
-.post-info {
-    padding: 3vh 3vw;
+.singlepost-info {
+    padding: 0 3vw;
+    padding-top: 3vh;
+    padding-bottom: 1vh;
 }
 
-#post-title {
+#singlepost-title {
     margin-top: 0.5vh;
-    margin-bottom: 3.5vh;
+    margin-bottom: 0.5vh;
 }
 
-#post-body {
+#singlepost-body {
     margin-bottom: 1vh;
 }
 
-
-#post-date {
-    float: right;
+#singlepost-date {
+    font-size: small;
 }
 
 .admin-post-panel {
@@ -162,47 +218,154 @@ left: -35px;
 
 .admin-post-panel ul li:hover {
     transition: 0.5s;
-    background-color: rgba(255,255,255,0.6);
-    color: black;
+    background-color: rgba(255,255,255,0.3);
 }
 
 #opt-menu, #opt-adm-menu {
-    background-color: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 2px;
-    margin: 0 5px;
+    padding: 5px;
+    margin: 5px 5px;
     float: right;
 }
 
-#com {
+#opt-menu:hover, #opt-adm-menu:hover {
+    transition: 0.5s;
+    background-color: rgba(255,255,255,0.3);
+}
+
+#singlepost-comments-textarea {
     resize: none;
     width: 99%;
     height: 10vh;
+    background-color: rgb(50, 50, 50);
+    color: white;
 }
 
-.coms {
+.singlepost-comments-submit {
     margin: 2vh 1.5vw;
 }
 
-.line {
+.singlepost-line {
     height: 0;
     width: 90%;
-    margin: 5vh 5vw;
+    margin: 3vh 5vw;
     border: 1px solid rgba(255,255,255,0.5);
 }
 
-#post-comments-sect-comment {
+#singlepost-comments-sect-comment {
     margin-bottom: 2vh;
 }
 
-.comments {
+.singlepost-comments {
     margin-left: 1.5vw;
 }
 
-#post-comments-sect-singlecomment {
+#singlepost-comments-sect-singlecomment {
     margin-left: 0.5vw;
+    padding-bottom: 1vh;
 }
 
-#post-comments-sect-singlecomment-author, #post-comments-sect-singlecomment-body {
+#singlepost-comments-sect-singlecomment-author, #singlepost-comments-sect-singlecomment-body {
     margin-bottom: 0.3vh;
 }
+
+#singlepost-comments-sect-commentline {
+    height: 0;
+    width: 20vw;
+    border: 1px solid rgba(255,255,255,0.5);
+    margin: 1vh 0;
+}
+
+#singlepost-author a {
+    text-decoration: none;
+    
+}
+
+#singlepost-info-author-avatar {
+    display: grid;
+}
+
+.voting {
+    display: flex;
+}
+
+#singlepost-post-votes {
+    margin-right: 5px;
+    margin-left: 1.5vw;
+    font-size: large;
+}
+
+#singlepost-post-upvote {
+    margin: 0 5px;
+    padding: 2px 4px;
+}
+
+#singlepost-post-downvote {
+    padding: 2px 4px;
+}
+
+
+
+
+/* user profile page */
+
+#profile-avatar {
+    
+    margin: 7vh 7vw;
+}
+
+.profilewin {
+    height: 80vh;
+    width: 70vw;
+    margin: 7vh 15vw;
+    background-color: rgb(46, 46, 46);
+    
+}
+
+.profile-flex {
+    display: flex;
+    width: 40%;
+    height: 30vh;
+    justify-content: space-around;
+}
+
+.profile-bio {
+    margin-top: 2vh;
+}
+
+.profile-bio em {
+    opacity: 60%;
+}
+
+.profile-avatar-space {
+    margin-top: 2vh;
+    height: 200px;
+    width: 200px;
+    border: 1px solid white;
+}
+
+.userPosts {
+    margin: 1vh 1vw;
+    max-width: 20vw;
+}
+
+#user-posts-line {
+    height: 0;
+    width: 20vw;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+#user-posts-date {
+    font-size: small;
+    margin-bottom: 0.2em;
+}
+
+#user-posts-title {
+    font-size: large;
+    margin-bottom: 0.1em;
+    max-width: 20vw;
+}
+
+#user-posts-link {
+    text-decoration: none;
+}
+
